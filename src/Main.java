@@ -54,8 +54,7 @@ public class Main {
 								vendas.forEach(Venda::mostrarVenda);
 							}
 							case 2 -> {
-								for (int i = 0; i < empresas.size(); i++) {
-									var empresa = empresas.get(i);
+								for (Empresa empresa : empresas) {
 									System.out.printf("\nProduto da empresa %s - código %d\n", empresa.getNome(), empresa.getId());
 									produtos.stream().filter(produto -> produto.getEmpresa().getId().equals(empresa.getId())).toList().forEach(prod -> {
 										System.out.printf("%d - %s - R$ %.2f - %d unidades\n", prod.getId(), prod.getNome(), prod.getPreco(), prod.getQuantidade());
