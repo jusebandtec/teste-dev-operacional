@@ -1,7 +1,7 @@
 import java.util.List;
 
 public class Venda {
-	private Integer código;
+	private Integer codigo;
 	private List<Produto> itens;
 	private Double valor;
 	private Double comissaoSistema;
@@ -10,7 +10,7 @@ public class Venda {
 
 	public Venda(Integer código, List<Produto> itens, Double valor, Double comissaoSistema, Empresa empresa, Cliente cliente) {
 		super();
-		this.código = código;
+		this.codigo = código;
 		this.itens = itens;
 		this.valor = valor;
 		this.comissaoSistema = comissaoSistema;
@@ -22,8 +22,8 @@ public class Venda {
 		super();
 	}
 
-	public Integer getCódigo() {
-		return código;
+	public Integer getCodigo() {
+		return codigo;
 	}
 	
 	
@@ -44,8 +44,8 @@ public class Venda {
 		this.cliente = cliente;
 	}
 
-	public void setCódigo(Integer código) {
-		this.código = código;
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
 
 	public List<Produto> getItens() {
@@ -72,4 +72,25 @@ public class Venda {
 		this.comissaoSistema = comissaoSistema;
 	}
 
+	public void mostrarVenda() {
+		System.out.println("************************************************************");
+		System.out.printf("Venda de código - %d - CPF %s :\n", this.codigo, this.cliente.getCpf());
+		this.itens.forEach(item -> {
+			System.out.printf("%d - %s - R$ %.2f\n", item.getId(), item.getNome(), item.getPreco());
+		});
+		System.out.printf("Total Venda: R$ %.2f\n", this.valor);
+		System.out.printf("Total Taxa a ser paga: R$ %.2f\n", this.comissaoSistema);
+		System.out.printf("Total Líquido  para empresa: R$ %.2f\n",(this.valor - this.comissaoSistema));
+		System.out.println("************************************************************");
+	}
+
+	public void mostrarCompra() {
+		System.out.println("************************************************************");
+		System.out.printf("\nCompra de código - %d - na empresa %s:\n", this.codigo, this.empresa.getNome());
+		this.itens.forEach(item -> {
+			System.out.printf("%d - %s - R$ %.2f\n", item.getId(), item.getNome(), item.getPreco());
+		});
+		System.out.printf("Total: R$\n" + this.valor);
+		System.out.println("************************************************************");
+	}
 }

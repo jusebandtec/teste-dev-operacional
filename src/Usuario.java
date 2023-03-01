@@ -1,9 +1,13 @@
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class Usuario {
 	private String username;
 	private String senha;
 	private Cliente cliente;
 	private Empresa empresa;
+	private final int tempoExpiracao = 10;
+	private LocalDateTime inicioSecao;
 
 	public Usuario() {
 		super();
@@ -17,12 +21,35 @@ public class Usuario {
 		this.empresa = empresa;
 	}
 
-	public boolean IsAdmin() {
+	public boolean isAdmin() {
 		return this.empresa == null && this.cliente == null;
 	}
 
-	public boolean IsEmpresa() {
+	public boolean isEmpresa() {
 		return this.empresa != null;
+	}
+
+	public void login(String usuario, String senha) {
+		if (this.username.equals(usuario) && this.senha.equals(senha)) {
+			this.inicioSecao = LocalDateTime.now();
+		}
+	}
+
+	public boolean estaLogado() {
+		if (this.inicioSecao != null) {
+			Duration duracoSecao = Duration.between(this.inicioSecao, LocalDateTime.now());
+			if (duracoSecao.toMinutes() < this.tempoExpiracao) {
+				this.inicioSecao = LocalDateTime.now();
+				return true;
+			} else {
+				deslogar();
+			}
+		}
+		return false;
+	}
+
+	public void deslogar() {
+		this.inicioSecao = null;
 	}
 
 	public boolean IsCliente() {

@@ -62,4 +62,13 @@ public class Produto {
 		this.preco = preco;
 	}
 
+	public void mostrarProduto() {
+		System.out.println("************************************************************");
+		System.out.println("Código: " + this.id);
+		System.out.println("Produto: " + this.nome);
+		System.out.println("Quantidade em estoque: " + this.quantidade);
+		System.out.println("Valor: R$" + this.preco);
+		System.out.println("************************************************************");
+	}
+
 }
